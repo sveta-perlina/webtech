@@ -1,2 +1,162 @@
-test
-123
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Учебные задания</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #222;
+      line-height: 1.5;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      background: #222;
+      color: white;
+      padding: 48px 0;
+    }
+
+    header h1 {
+      margin: 0 0 12px;
+      font-size: 36px;
+    }
+
+    header p {
+      margin: 0;
+      color: #d0d0d0;
+      max-width: 700px;
+    }
+
+    .info-box {
+      margin-top: 20px;
+      padding: 16px 18px;
+      max-width: 420px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+    }
+
+    .info-box p {
+      margin: 6px 0;
+      color: #f0f0f0;
+    }
+
+    main {
+      padding: 32px 0 48px;
+    }
+
+    .section-title {
+      margin: 0 0 20px;
+      font-size: 28px;
+    }
+
+    .labs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .card h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+    }
+
+    .card p {
+      margin: 0 0 16px;
+      color: #555;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #efefef;
+      font-size: 12px;
+      color: #444;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 14px;
+      background: #222;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+
+    .button:hover {
+      background: #000;
+    }
+
+    footer {
+      padding: 20px 0 40px;
+      color: #666;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Лендинг-страница с учебными заданиями</h1>
+      <p>
+        Entrypoint для размещения различных заданий в рамках учебынх дицсциплин
+      </p>
+
+      <div class="info-box">
+        <p><strong>ФИО:</strong> Перлина Светлана Анатольевна</p>
+        <p><strong>Группа:</strong> Р4110</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <h2 class="section-title">Список работ</h2>
+
+      <div class="labs">
+
+        <div class="card">
+          <div class="tag">Исследование экосистем веб-языков</div>
+          <h2>Задание от 24-02-2026</h2>
+          <p>Реализация веб-формы для перевода суммы из рублей в юани по курсу ЦБ и автоматической отправки результата вместе с фамилией в Google Form.</p>
+          <a class="button" href="https://se.ifmo.ru/~s507544/converter.html">Открыть</a>
+        </div>
+
+        <div class="card">
+          <div class="tag">Исследование экосистем веб-языков</div>
+          <h2>Задание от 17-03-2026</h2>
+          <p>XSLT-преобразование XML-документа с русскоязычными тегами в SVG-графику</p>
+          <a class="button" href="">Открыть</a>
+        </div>
+        
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
+
