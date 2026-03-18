@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>RUB to CNY</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #4e73df, #1cc88a, #e982ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    width: 350px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+h1 {
+    margin-top: 0;
+    color: #4e73df;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: gray;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 6px;
+    background: #4e73df;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #2e59d9;
+    transform: scale(1.03);
+}
+
+.result {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #1cc88a;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Конвертер валют</h1>
+    <div class="subtitle">Перлина Светлана</div>
+
+    <input type="text" id="lastname" placeholder="Введите фамилию">
+    <input type="number" id="rub" placeholder="Сумма в рублях">
+
+    <button onclick="sendData()">Перевести и отправить</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+function sendData() {
+
+    const lastname = document.getElementById("lastname").value;
+    const rub = document.getElementById("rub").value;
+
+    if (!lastname || !rub) {
+        alert("Пожалуйста, заполните все поля");
+        return;
+    }
+
+    fetch("https://www.cbr-xml-daily.ru/daily_json.js")
+    .then(response => response.json())
+    .then(data => {
+
+        const rate = data.Valute.CNY.Value;
+        const result = (rub / rate).toFixed(2);
+
+        document.getElementById("result").innerText =
+            "Сумма в юанях: " + result;
+
+        const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSc_sJpZ-t2y-Mt_HsDADgh4-et7OGLGFqZNXseLRQlGwciWoQ/formResponse";
+
+      let formData = new URLSearchParams({"entry.138719531":lastname, "entry.1949578643":result});
+        
+        fetch(formURL, {
+            method: "POST",
+            mode: "no-cors",
+            body: formData
+        });
+
+        alert("Данные успешно отправлены!");
+    });
+}
+</script>
+
+</body>
+</html>
