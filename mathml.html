@@ -1,0 +1,60 @@
+
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XSLT в MathML</title>
+</head>
+<body>
+<h1>XSLT-преобразование в MathML</h1>
+
+<p><strong>Результат:</strong></p>
+<div id="out">Загрузка…</div>
+
+<p><strong>XML (вход):</strong></p>
+<pre id="xml">Загрузка…</pre>
+
+<script>
+  async function fetchText(url) {
+    const r = await fetch(url, { cache: "no-cache" });
+    if (!r.ok) throw new Error(`${url}: HTTP ${r.status}`);
+    return await r.text();
+  }
+
+  async function fetchXml(url) {
+    const r = await fetch(url, { cache: "no-cache" });
+    if (!r.ok) throw new Error(`${url}: HTTP ${r.status}`);
+    const text = await r.text();
+    return new DOMParser().parseFromString(text, "application/xml");
+  }
+
+  async function run() {
+    const out = document.getElementById("out");
+    const xmlPre = document.getElementById("xml");
+
+    try {
+      const [xmlText, xmlDoc, xslDoc] = await Promise.all([
+        fetchText("./input.xml"),
+        fetchXml("./input.xml"),
+        fetchXml("./math.xsl"),
+      ]);
+      xmlPre.textContent = xmlText;
+
+      const proc = new XSLTProcessor();
+      proc.importStylesheet(xslDoc);
+      const fragment = proc.transformToFragment(xmlDoc, document);
+
+      out.innerHTML = "";
+      out.appendChild(fragment);
+
+
+    } catch (e) {
+      out.textContent = "Ошибка: " + (e && e.message ? e.message : String(e));
+    }
+  }
+
+  run();
+</script>
+</body>
+</html>
